@@ -25,7 +25,7 @@ gem 'health_check', '~> 3.1.0'
 gem 'tiny_appstore_connect', '~> 0.1.12'
 
 # View
-gem 'view_component', '~> 4.6.0'
+gem 'view_component', '~> 4.7.0'
 gem 'jb', '~> 0.8.2'
 gem 'slim-rails', '~> 4.0.0'
 gem 'kramdown', '~> 2.5'
@@ -69,19 +69,19 @@ gem 'plist', '~> 3.7.2'
 ## OS
 gem 'sys-filesystem', '~> 1.5.5'
 gem 'vmstat', '~> 2.3.0'
-gem 'pghero', '~> 3.7.0'
+gem 'pghero', '~> 3.8.0'
 
 ## Exception handler
 gem 'sentry-ruby', '~> 6.5.0'
 gem 'sentry-rails', '~> 6.5.0'
 
 # Background job
-gem 'good_job', '~> 4.15.0'
+gem 'good_job', '~> 4.18.2'
 gem 'activejob-status', '~> 1.0.2'
 
 # Assets
 ## Use jvite_rails to run rake tasks, core in package.json
-gem 'propshaft', '1.3.1'
+gem 'propshaft', '1.3.2'
 gem 'vite_rails', '~> 3.10.0'
 gem 'stimulus-rails', '~> 1.3.4'
 gem 'turbo-rails', '~> 2.0.23'
