@@ -1,21 +1,20 @@
 # frozen_string_literal: true
 
 class Download::DebugFilesController < ApplicationController
+  include CloudStorageDownload
+
   before_action :set_debug_file
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_entity_response
 
   def show
-    return render_not_found_entity_response unless File.exist?(@debug_file.file.path.to_s)
+    return render_not_found_entity_response unless file_exists?(@debug_file.file)
 
     redirect_to filename_download_debug_file_url(@debug_file, @debug_file.download_filename)
   end
 
   def download
-    headers['Content-Length'] = @debug_file.file.size
-    send_file @debug_file.file.path,
-              filename: @debug_file.download_filename,
-              disposition: 'attachment'
+    send_file_or_redirect(@debug_file.file, filename: @debug_file.download_filename)
   end
 
   private

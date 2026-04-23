@@ -21,7 +21,7 @@ module AppsHelper
   def app_icon(release, options = {})
     images_class = options.delete(:class).to_s.split(' ')
     images_class = (APP_ICON_CLASS + images_class).uniq
-    unless release&.icon && release.icon.file && release.icon.file.exists?
+    unless release&.icon&.file.present?
       options[:class] = images_class.push('app-empty-icon').join(' ')
       return vite_image_tag 'images/zealot-icon.png', **options
     end

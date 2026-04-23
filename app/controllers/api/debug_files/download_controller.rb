@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Api::DebugFiles::DownloadController < Api::BaseController
+  include CloudStorageDownload
+
   before_action :validate_channel_key
   before_action :set_app
 
@@ -18,7 +20,7 @@ class Api::DebugFiles::DownloadController < Api::BaseController
       search_by_device_type(order)
     end
 
-    return render_not_found unless @debug_file && File.exist?(@debug_file.file.path)
+    return render_not_found unless @debug_file && file_exists?(@debug_file.file)
 
     redirect_to @debug_file.file_url, status: :found
   end

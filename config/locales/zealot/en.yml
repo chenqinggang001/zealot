@@ -169,6 +169,12 @@ en:
       misc: Misc
       show_footer_version: Show Zealot version information in the footer.
       show_footer_openapi_endpoints: Show OpenAPI documentation endpoints in the footer.
+      storage: Storage
+      storage_s3: S3-compatible object storage
+      storage_s3_hint: |
+        Configure S3-compatible object storage (Huawei Cloud OBS / MinIO / Aliyun OSS / Tencent COS / AWS S3).
+        Required: endpoint, region, bucket, access_key_id, secret_access_key.
+        Set force_path_style to true for MinIO. Restart required after changes.
       empty_value: Empty
       no_editable_key: Read only
       reset: Reset to default value

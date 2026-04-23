@@ -6,3 +6,4 @@
 Rails.application.config.filter_parameters += %i[
   passw email secret token _key crypt salt certificate otp ssn cvv cvc
 ]
+Rails.application.config.filter_parameters += [:secret_access_key, :access_key_id]

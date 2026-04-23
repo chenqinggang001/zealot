@@ -167,6 +167,12 @@ zh-CN:
       misc: 杂项
       show_footer_version: 显示底部版本号
       show_footer_openapi_endpoints: 显示底部 OpenAPI 链接
+      storage: 存储
+      storage_s3: S3 兼容对象存储
+      storage_s3_hint: |
+        配置 S3 兼容对象存储（华为云 OBS / MinIO / 阿里云 OSS / 腾讯云 COS / AWS S3）。
+        必填：endpoint、region、bucket、access_key_id、secret_access_key。
+        MinIO 需将 force_path_style 设为 true。修改后需重启生效。
       empty_value: 空值
       no_editable_key: 当前设置为可读，无法修改
       reset: 恢复默认值

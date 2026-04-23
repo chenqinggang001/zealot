@@ -117,15 +117,12 @@ class Release < ApplicationRecord
   end
 
   def file?
-    return false if file.blank?
-
-    File.exist?(file.path)
+    file.file.present?
   end
 
   def file_extname
-    return '.zip' if file.blank? || !File.file?(file&.path)
-
-    File.extname(file.path)
+    ext = File.extname(file.path.to_s)
+    ext.presence || '.zip'
   end
 
   def download_filename
@@ -289,6 +286,8 @@ class Release < ApplicationRecord
   end
 
   def determine_disk_space
+    return if Zealot::Storage::Manager.cloud_enabled?
+
     upload_path = Sys::Filesystem.stat(Rails.root.join('public/uploads'))
     disk_free_size = upload_path.bytes_free
     file_size = self&.file&.size || 0

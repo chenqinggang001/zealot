@@ -5,7 +5,7 @@
 build_info/
 extensions/
 bundler/
-storage/
+/storage/
 bin/importmap
 
 # minimal Rails specific artifacts

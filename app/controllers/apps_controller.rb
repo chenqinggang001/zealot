@@ -108,8 +108,37 @@ class AppsController < ApplicationController
   def destroy_app_data
     require 'fileutils'
 
-    app_binary_path = Rails.root.join('public', 'uploads', 'apps', "a#{@app.id}")
-    FileUtils.rm_rf(app_binary_path) if Dir.exist?(app_binary_path)
+    if Zealot::Storage::Manager.cloud_enabled?
+      destroy_cloud_app_data
+    else
+      app_binary_path = Rails.root.join('public', 'uploads', 'apps', "a#{@app.id}")
+      FileUtils.rm_rf(app_binary_path) if Dir.exist?(app_binary_path)
+    end
+  end
+
+  def destroy_cloud_app_data
+    cfg    = Zealot::Storage::Manager.config
+    client = Aws::S3::Client.new(
+      credentials: Aws::Credentials.new(**Zealot::Storage::Manager.aws_credentials),
+      **Zealot::Storage::Manager.aws_options
+    )
+    prefix = [cfg[:path_prefix], 'uploads', 'apps', "a#{@app.id}"].compact.join('/')
+
+    continuation = nil
+    loop do
+      resp = client.list_objects_v2(bucket: cfg[:bucket], prefix: prefix, continuation_token: continuation)
+      break if resp.contents.empty?
+
+      client.delete_objects(
+        bucket: cfg[:bucket],
+        delete: { objects: resp.contents.map { |o| { key: o.key } }, quiet: true }
+      )
+
+      break unless resp.is_truncated
+      continuation = resp.next_continuation_token
+    end
+  rescue => e
+    Rails.logger.error("[Storage] destroy_cloud_app_data failed app=#{@app.id}: #{e.class}: #{e.message}")
   end
 
   def set_owner

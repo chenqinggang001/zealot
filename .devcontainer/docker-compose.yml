@@ -5,6 +5,7 @@ services:
       dockerfile: .devcontainer/Dockerfile
     volumes:
       - ..:/workspace:cached
+      - node_modules:/workspace/node_modules
     command: /bin/sh -c "while sleep 1000; do :; done"
     network_mode: service:db
   db:
@@ -27,4 +28,5 @@ services:
       DATABASE_URL: "postgres://postgres:postgres@localhost:5432/zealot_development"
 
 volumes:
+  node_modules:
   postgres-data:

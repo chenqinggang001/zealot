@@ -4,13 +4,16 @@ class DebugFileTeardownJob < ApplicationJob
   queue_as :app_parse
 
   def perform(debug_file, user_id = nil)
-    parser = AppInfo.parse(debug_file.file.path)
+    parser = nil
+    debug_file.file.with_local_path do |path|
+      parser = AppInfo.parse(path)
 
-    case parser.format
-    when AppInfo::Format::DSYM
-      parse_dsym(debug_file, parser)
-    when AppInfo::Format::PROGUARD
-      parse_proguard(debug_file, parser)
+      case parser.format
+      when AppInfo::Format::DSYM
+        parse_dsym(debug_file, parser)
+      when AppInfo::Format::PROGUARD
+        parse_proguard(debug_file, parser)
+      end
     end
 
     notificate_success(
