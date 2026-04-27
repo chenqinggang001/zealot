@@ -35,7 +35,7 @@ namespace :zealot do
 
       upload_file = lambda do |path|
         counters[:total] += 1
-        key = Pathname.new(path).relative_path_from(uploads_root.parent).to_s
+        key = Zealot::Storage::Manager.object_key(Pathname.new(path).relative_path_from(uploads_root.parent).to_s)
 
         if !force && object_exists.call(key)
           counters[:skipped] += 1

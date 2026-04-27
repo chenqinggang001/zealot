@@ -5,6 +5,8 @@ class ApplicationUploader < CarrierWave::Uploader::Base
   after :remove, :delete_empty_upstream_dirs
 
   def base_store_dir
+    return Zealot::Storage::Manager.object_key('uploads') if Zealot::Storage::Manager.cloud_enabled?
+
     'uploads'
   end
 

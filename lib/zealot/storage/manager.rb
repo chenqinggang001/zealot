@@ -15,6 +15,15 @@ module Zealot
         Setting.storage_s3.deep_symbolize_keys
       end
 
+      def path_prefix
+        config[:path_prefix].to_s.strip.split('/').map(&:strip).reject(&:blank?).join('/')
+      end
+
+      def object_key(*parts)
+        key_parts = parts.flatten.compact.map { |part| part.to_s.gsub(%r{\A/+|/+\z}, '') }.reject(&:empty?)
+        ([path_prefix].reject(&:empty?) + key_parts).join('/')
+      end
+
       def aws_credentials
         { access_key_id: config[:access_key_id], secret_access_key: config[:secret_access_key] }
       end
@@ -38,7 +47,7 @@ module Zealot
       def verify!
         s3_client.head_bucket(bucket: config[:bucket])
         :ok
-      rescue => e
+      rescue StandardError => e
         { error: e.class.name, message: e.message }
       end
     end

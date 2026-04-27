@@ -8,7 +8,7 @@ module CloudStorageDownload
   def send_file_or_redirect(carrierwave_file, filename:, disposition: 'attachment')
     if Zealot::Storage::Manager.cloud_enabled?
       redirect_to carrierwave_file.url(
-        response_content_disposition: %Q(#{disposition}; filename="#{filename}"),
+        response_content_disposition: %(#{disposition}; filename="#{filename}"),
         expires_in: Zealot::Storage::Manager.config[:presign_expires_in]
       ), allow_other_host: true
     else

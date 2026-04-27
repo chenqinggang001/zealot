@@ -117,9 +117,10 @@ class AppsController < ApplicationController
   end
 
   def destroy_cloud_app_data
-    cfg    = Zealot::Storage::Manager.config
+    cfg = Zealot::Storage::Manager.config
     client = Zealot::Storage::Manager.s3_client
-    prefix = [cfg[:path_prefix], 'uploads', 'apps', "a#{@app.id}"].compact.join('/')
+    app_prefix = Zealot::Storage::Manager.object_key('uploads', 'apps', "a#{@app.id}")
+    prefix = "#{app_prefix}/"
 
     continuation = nil
     loop do
@@ -134,7 +135,7 @@ class AppsController < ApplicationController
       break unless resp.is_truncated
       continuation = resp.next_continuation_token
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("[Storage] destroy_cloud_app_data failed app=#{@app.id}: #{e.class}: #{e.message}")
   end
 
