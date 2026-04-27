@@ -19,6 +19,10 @@ module Zealot
         { access_key_id: config[:access_key_id], secret_access_key: config[:secret_access_key] }
       end
 
+      def aws_credentials_provider
+        Aws::Credentials.new(config[:access_key_id], config[:secret_access_key])
+      end
+
       def aws_options
         {
           endpoint:         config[:endpoint],
@@ -28,7 +32,7 @@ module Zealot
       end
 
       def s3_client
-        Aws::S3::Client.new(credentials: Aws::Credentials.new(**aws_credentials), **aws_options)
+        Aws::S3::Client.new(credentials: aws_credentials_provider, **aws_options)
       end
 
       def verify!

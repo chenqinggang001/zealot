@@ -118,10 +118,7 @@ class AppsController < ApplicationController
 
   def destroy_cloud_app_data
     cfg    = Zealot::Storage::Manager.config
-    client = Aws::S3::Client.new(
-      credentials: Aws::Credentials.new(**Zealot::Storage::Manager.aws_credentials),
-      **Zealot::Storage::Manager.aws_options
-    )
+    client = Zealot::Storage::Manager.s3_client
     prefix = [cfg[:path_prefix], 'uploads', 'apps', "a#{@app.id}"].compact.join('/')
 
     continuation = nil
