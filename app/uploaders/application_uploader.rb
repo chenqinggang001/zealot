@@ -17,6 +17,24 @@ class ApplicationUploader < CarrierWave::Uploader::Base
     @checksum ||= Digest::MD5.hexdigest(chunk.read.to_s)
   end
 
+  # Yield a real local path to `block`. For cloud-backed storage, streams the
+  # object into a Tempfile; for :file storage, yields `file.path` directly.
+  def with_local_path
+    f = file
+    return yield f.path if self.class.storage == CarrierWave::Storage::File
+
+    ext = ::File.extname(f.filename.to_s)
+    Tempfile.create(['zealot-', ext]) do |tmp|
+      tmp.close
+      Zealot::Storage::Manager.s3_client.get_object(
+        bucket: Zealot::Storage::Manager.config[:bucket],
+        key: f.path,
+        response_target: tmp.path
+      )
+      yield tmp.path
+    end
+  end
+
   protected
 
   # Copy from https://github.com/carrierwaveuploader/carrierwave/wiki/how-to:-make-a-fast-lookup-able-storage-directory-structure

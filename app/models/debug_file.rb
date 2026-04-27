@@ -91,9 +91,7 @@ class DebugFile < ApplicationRecord
   end
 
   def file?
-    return false if file.blank?
-
-    File.exist?(file.path)
+    file.file.present?
   end
 
   def file_url

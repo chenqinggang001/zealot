@@ -164,6 +164,21 @@ class Setting < RailsSettings::Base
       default: to_bool(ENV['ZEALOT_SHOW_FOOTER_OPENAPI_ENDPOINTS'] || 'false')
   end
 
+  scope :storage do
+    field :storage_s3, type: :hash, display: true, restart_required: true, default: {
+      enabled: to_bool(ENV['STORAGE_S3_ENABLED'] || 'false'),
+      endpoint: ENV['STORAGE_S3_ENDPOINT'],
+      region: ENV['STORAGE_S3_REGION'] || 'cn-north-4',
+      bucket: ENV['STORAGE_S3_BUCKET'],
+      access_key_id: ENV['STORAGE_S3_ACCESS_KEY_ID'],
+      secret_access_key: ENV['STORAGE_S3_SECRET_ACCESS_KEY'],
+      force_path_style: to_bool(ENV['STORAGE_S3_FORCE_PATH_STYLE'] || 'false'),
+      path_prefix: ENV['STORAGE_S3_PATH_PREFIX'],
+      object_acl: ENV['STORAGE_S3_OBJECT_ACL'] || 'private',
+      presign_expires_in: (ENV['STORAGE_S3_PRESIGN_EXPIRES_IN'] || 3600).to_i
+    }, validates: { json: { format: :hash } }
+  end
+
   # Backup settings1
   field :backup, type: :hash, readonly: true, default: {
     path: 'public/backup',
