@@ -195,7 +195,7 @@ GEM
     dry-cli (1.4.1)
     email_validator (2.2.4)
       activemodel
-    erb (6.0.3)
+    erb (6.0.4)
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
@@ -204,7 +204,7 @@ GEM
     factory_bot_rails (6.5.1)
       factory_bot (~> 6.5)
       railties (>= 6.1.0)
-    faker (3.6.1)
+    faker (3.8.0)
       i18n (>= 1.8.11, < 2)
     faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
@@ -260,7 +260,7 @@ GEM
       rake (>= 13)
     graphiql-rails (1.10.5)
       railties
-    graphql (2.5.23)
+    graphql (2.5.24)
       base64
       fiber-storage
       logger
@@ -439,8 +439,8 @@ GEM
     openssl (3.3.2)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
-    parallel (1.27.0)
-    parser (3.3.10.2)
+    parallel (2.0.1)
+    parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
     pedump (0.6.10)
@@ -559,7 +559,7 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
-    regexp_parser (2.11.3)
+    regexp_parser (2.12.0)
     reline (0.6.3)
       io-console (~> 0.5)
     request_store (1.7.0)
@@ -601,11 +601,11 @@ GEM
     rswag-ui (2.17.0)
       actionpack (>= 5.2, < 8.2)
       railties (>= 5.2, < 8.2)
-    rubocop (1.86.0)
+    rubocop (1.86.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
-      parallel (~> 1.10)
+      parallel (>= 1.10)
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 2.9.3, < 3.0)
@@ -701,7 +701,7 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.9)
-    view_component (4.7.0)
+    view_component (4.8.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
@@ -772,7 +772,7 @@ DEPENDENCIES
   gitlab_omniauth-ldap (~> 2.3.0)
   good_job (~> 4.18.2)
   graphiql-rails
-  graphql (~> 2.5.23)
+  graphql (~> 2.5.24)
   health_check (~> 3.1.0)
   jb (~> 0.8.2)
   kaminari (~> 1.2.2)
@@ -822,7 +822,7 @@ DEPENDENCIES
   sys-filesystem (~> 1.5.5)
   tiny_appstore_connect (~> 0.1.12)
   turbo-rails (~> 2.0.23)
-  view_component (~> 4.7.0)
+  view_component (~> 4.8.0)
   vite_rails (~> 3.10.0)
   vmstat (~> 2.3.0)
   web-console (>= 3.3.0)
