@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>应用列表 — App 下载中心</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="public-downloads__canvas-topbar">
+      <div class="public-downloads__canvas-topbar-inner">
+        <div class="public-downloads__canvas-brand">
+          <span class="public-downloads__canvas-brand-title">App 下载中心</span>
+          <span class="public-downloads__canvas-brand-route">/download_apps</span>
+        </div>
+        <nav class="public-downloads__canvas-nav" aria-label="设计稿页面">
+          <a class="public-downloads__canvas-nav-link is-active" href="./index.html">应用列表</a>
+          <a class="public-downloads__canvas-nav-link" href="./detail.html">下载详情</a>
+          <a class="public-downloads__canvas-nav-link" href="./password.html">密码访问</a>
+          <a class="public-downloads__canvas-nav-link" href="./spec.html">设计规范</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="public-downloads public-downloads--catalog">
+      <section class="public-downloads__catalog-shell">
+        <header class="public-downloads__catalog-head">
+          <div>
+            <h1>应用列表</h1>
+            <p>按系统选择应用与环境，进入该系统、该应用、该环境下的最新版本下载页</p>
+          </div>
+        </header>
+
+        <section class="public-downloads__catalog-tabs" aria-label="按系统筛选应用">
+          <input class="public-downloads__tab-input" type="radio" id="system-android" name="system" checked>
+          <input class="public-downloads__tab-input" type="radio" id="system-ios" name="system">
+          <input class="public-downloads__tab-input" type="radio" id="system-harmonyos" name="system">
+          <input class="public-downloads__tab-input" type="radio" id="system-macos" name="system">
+          <input class="public-downloads__tab-input" type="radio" id="system-windows" name="system">
+          <input class="public-downloads__tab-input" type="radio" id="system-linux" name="system">
+
+          <div class="public-downloads__catalog-tab-list">
+            <label for="system-android">Android</label>
+            <label for="system-ios">iOS</label>
+            <label for="system-harmonyos">HarmonyOS</label>
+            <label for="system-macos">macOS</label>
+            <label for="system-windows">Windows</label>
+            <label for="system-linux">Linux</label>
+          </div>
+
+          <div class="public-downloads__catalog-panels">
+            <!-- Android：与 canvas 示例一致 -->
+            <section class="public-downloads__catalog-panel public-downloads__catalog-panel--android">
+              <div class="public-downloads__catalog-panel-head">
+                <h2>Android</h2>
+                <span>2 款应用</span>
+              </div>
+              <div class="public-downloads__canvas-panel-body">
+                <article class="public-downloads__canvas-app-card">
+                  <div class="public-downloads__canvas-app-row">
+                    <div class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--a" aria-hidden="true">B</div>
+                    <div class="public-downloads__canvas-app-main">
+                      <div class="public-downloads__canvas-app-title-row">
+                        <h3>BizTrack</h3>
+                      </div>
+                      <div class="public-downloads__canvas-app-sub">
+                        <span class="public-downloads__canvas-pill">Android</span>
+                        <span class="public-downloads__canvas-ver">v3.3.0-beta · #1031</span>
+                      </div>
+                    </div>
+                    <div class="public-downloads__canvas-app-aside">
+                      <span class="public-downloads__canvas-time">30分钟前</span>
+                      <span class="public-downloads__canvas-pill public-downloads__canvas-pill--success">公开</span>
+                    </div>
+                  </div>
+                  <div class="public-downloads__canvas-divider" role="presentation"></div>
+                  <div class="public-downloads__canvas-env-buttons">
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--primary" href="./detail.html">正式环境</a>
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--secondary" href="./password.html">预发布环境</a>
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--secondary" href="./password.html">测试环境</a>
+                  </div>
+                </article>
+
+                <article class="public-downloads__canvas-app-card public-downloads__canvas-app-card--archived">
+                  <div class="public-downloads__canvas-app-row">
+                    <div class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--c" aria-hidden="true">W</div>
+                    <div class="public-downloads__canvas-app-main">
+                      <div class="public-downloads__canvas-app-title-row">
+                        <h3>WorkForce</h3>
+                        <span class="public-downloads__canvas-pill public-downloads__canvas-pill--warn">已归档</span>
+                      </div>
+                      <div class="public-downloads__canvas-app-sub">
+                        <span class="public-downloads__canvas-pill">Android</span>
+                        <span class="public-downloads__canvas-ver">v1.5.3 · #203</span>
+                      </div>
+                    </div>
+                    <div class="public-downloads__canvas-app-aside">
+                      <span class="public-downloads__canvas-time">45天前</span>
+                      <span class="public-downloads__canvas-pill public-downloads__canvas-pill--success">公开</span>
+                    </div>
+                  </div>
+                  <div class="public-downloads__canvas-divider" role="presentation"></div>
+                  <div class="public-downloads__canvas-env-buttons">
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--primary" href="./detail.html">正式环境</a>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="public-downloads__catalog-panel public-downloads__catalog-panel--ios">
+              <div class="public-downloads__catalog-panel-head">
+                <h2>iOS</h2>
+                <span>2 款应用</span>
+              </div>
+              <div class="public-downloads__canvas-panel-body">
+                <article class="public-downloads__canvas-app-card">
+                  <div class="public-downloads__canvas-app-row">
+                    <div class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--a" aria-hidden="true">B</div>
+                    <div class="public-downloads__canvas-app-main">
+                      <div class="public-downloads__canvas-app-title-row">
+                        <h3>BizTrack</h3>
+                      </div>
+                      <div class="public-downloads__canvas-app-sub">
+                        <span class="public-downloads__canvas-pill">iOS</span>
+                        <span class="public-downloads__canvas-ver">v3.2.1 · #1024</span>
+                      </div>
+                    </div>
+                    <div class="public-downloads__canvas-app-aside">
+                      <span class="public-downloads__canvas-time">2小时前</span>
+                      <span class="public-downloads__canvas-pill public-downloads__canvas-pill--success">公开</span>
+                    </div>
+                  </div>
+                  <div class="public-downloads__canvas-divider" role="presentation"></div>
+                  <div class="public-downloads__canvas-env-buttons">
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--primary" href="./detail.html">正式环境</a>
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--secondary" href="./password.html">测试环境</a>
+                  </div>
+                </article>
+
+                <article class="public-downloads__canvas-app-card">
+                  <div class="public-downloads__canvas-app-row">
+                    <div class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--b" aria-hidden="true">F</div>
+                    <div class="public-downloads__canvas-app-main">
+                      <div class="public-downloads__canvas-app-title-row">
+                        <h3>FieldSync</h3>
+                      </div>
+                      <div class="public-downloads__canvas-app-sub">
+                        <span class="public-downloads__canvas-pill">iOS</span>
+                        <span class="public-downloads__canvas-ver">v2.0.0 · #512</span>
+                      </div>
+                    </div>
+                    <div class="public-downloads__canvas-app-aside">
+                      <span class="public-downloads__canvas-time">1天前</span>
+                      <span class="public-downloads__canvas-pill public-downloads__canvas-pill--success">公开</span>
+                    </div>
+                  </div>
+                  <div class="public-downloads__canvas-divider" role="presentation"></div>
+                  <div class="public-downloads__canvas-env-buttons">
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--primary" href="./detail.html">正式环境</a>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="public-downloads__catalog-panel public-downloads__catalog-panel--harmonyos public-downloads__catalog-panel--empty">
+              <div class="public-downloads__catalog-panel-head">
+                <h2>HarmonyOS</h2>
+                <span>0 款应用</span>
+              </div>
+              <p class="public-downloads__canvas-empty">该平台暂无可下载应用</p>
+            </section>
+
+            <section class="public-downloads__catalog-panel public-downloads__catalog-panel--macos">
+              <div class="public-downloads__catalog-panel-head">
+                <h2>macOS</h2>
+                <span>1 款应用</span>
+              </div>
+              <div class="public-downloads__canvas-panel-body">
+                <article class="public-downloads__canvas-app-card">
+                  <div class="public-downloads__canvas-app-row">
+                    <div class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--a" aria-hidden="true">B</div>
+                    <div class="public-downloads__canvas-app-main">
+                      <div class="public-downloads__canvas-app-title-row">
+                        <h3>BizTrack Desktop</h3>
+                      </div>
+                      <div class="public-downloads__canvas-app-sub">
+                        <span class="public-downloads__canvas-pill">macOS</span>
+                        <span class="public-downloads__canvas-ver">v3.2.0 · #1020</span>
+                      </div>
+                    </div>
+                    <div class="public-downloads__canvas-app-aside">
+                      <span class="public-downloads__canvas-time">5天前</span>
+                      <span class="public-downloads__canvas-pill public-downloads__canvas-pill--success">公开</span>
+                    </div>
+                  </div>
+                  <div class="public-downloads__canvas-divider" role="presentation"></div>
+                  <div class="public-downloads__canvas-env-buttons">
+                    <a class="public-downloads__canvas-btn public-downloads__canvas-btn--primary" href="./detail.html">正式环境</a>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="public-downloads__catalog-panel public-downloads__catalog-panel--windows public-downloads__catalog-panel--empty">
+              <div class="public-downloads__catalog-panel-head">
+                <h2>Windows</h2>
+                <span>0 款应用</span>
+              </div>
+              <p class="public-downloads__canvas-empty">该平台暂无可下载应用</p>
+            </section>
+
+            <section class="public-downloads__catalog-panel public-downloads__catalog-panel--linux public-downloads__catalog-panel--empty">
+              <div class="public-downloads__catalog-panel-head">
+                <h2>Linux</h2>
+                <span>0 款应用</span>
+              </div>
+              <p class="public-downloads__canvas-empty">该平台暂无可下载应用</p>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

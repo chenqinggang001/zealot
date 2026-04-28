@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>设计规范 — App 下载中心</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="public-downloads__canvas-topbar">
+      <div class="public-downloads__canvas-topbar-inner">
+        <div class="public-downloads__canvas-brand">
+          <span class="public-downloads__canvas-brand-title">App 下载中心</span>
+          <span class="public-downloads__canvas-brand-route">设计规范参考</span>
+        </div>
+        <nav class="public-downloads__canvas-nav" aria-label="设计稿页面">
+          <a class="public-downloads__canvas-nav-link" href="./index.html">应用列表</a>
+          <a class="public-downloads__canvas-nav-link" href="./detail.html">下载详情</a>
+          <a class="public-downloads__canvas-nav-link" href="./password.html">密码访问</a>
+          <a class="public-downloads__canvas-nav-link is-active" href="./spec.html">设计规范</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="public-downloads public-downloads--spec">
+      <div class="public-downloads__spec-shell">
+        <section class="public-downloads__spec-block">
+          <h1>整体视觉方向</h1>
+          <p class="public-downloads__spec-text">
+            现代、简洁、企业级 App 商店风格。以蓝紫系强调色为主色，背景保持白与浅灰中性，
+            通过卡片层级与字体权重构建清晰的信息层次。不出现侧边栏、管理按钮、后台导航等管理界面元素。
+          </p>
+          <p class="public-downloads__spec-text">
+            移动端优先：单列布局，大号触控区域。桌面端增强：列表页可切换为 2–3 列 Grid，
+            详情页二维码与操作按钮左右并列，历史版本完整宽度展示。
+          </p>
+        </section>
+
+        <hr class="public-downloads__spec-sep">
+
+        <section class="public-downloads__spec-block">
+          <h2>配色系统</h2>
+          <p class="public-downloads__spec-muted">静态稿使用 CSS 变量，与实现时 Tailwind / 设计 token 对齐。</p>
+          <div class="public-downloads__spec-swatches">
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--primary)"></span><span>强调主色 --primary</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--success)"></span><span>成功 / 主操作 --success</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--base-100)"></span><span>表面白 --base-100</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--base-200)"></span><span>页面底 --base-200</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--base-300)"></span><span>边框 --base-300</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--info-soft)"></span><span>信息浅底 --info-soft</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--warning-soft)"></span><span>警告浅底 --warning-soft</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--error-soft)"></span><span>错误浅底 --error-soft</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--base-content)"></span><span>主文字 --base-content</span></div>
+            <div class="public-downloads__spec-swatch"><span class="public-downloads__spec-swatch-color" style="background: var(--muted)"></span><span>次要文字 --muted</span></div>
+          </div>
+        </section>
+
+        <hr class="public-downloads__spec-sep">
+
+        <section class="public-downloads__spec-block">
+          <h2>字体层级</h2>
+          <div class="public-downloads__spec-table-wrap">
+            <table class="public-downloads__spec-table">
+              <thead>
+                <tr>
+                  <th>层级</th>
+                  <th>用途</th>
+                  <th>字号</th>
+                  <th>字重</th>
+                  <th>变量 / 类</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>页面主标题</td>
+                  <td>App 名称（详情页）</td>
+                  <td>18–22px</td>
+                  <td>700</td>
+                  <td>.public-downloads__canvas-detail-name</td>
+                </tr>
+                <tr>
+                  <td>卡片标题</td>
+                  <td>App 名称（列表）</td>
+                  <td>16px</td>
+                  <td>650–700</td>
+                  <td>h3 in card</td>
+                </tr>
+                <tr>
+                  <td>版本号</td>
+                  <td>主版本展示</td>
+                  <td>14–15px</td>
+                  <td>600</td>
+                  <td>.public-downloads__canvas-detail-version</td>
+                </tr>
+                <tr>
+                  <td>正文</td>
+                  <td>更新说明、描述</td>
+                  <td>14–15px</td>
+                  <td>400</td>
+                  <td>body / .public-downloads__spec-text</td>
+                </tr>
+                <tr>
+                  <td>辅助信息</td>
+                  <td>构建号、时间戳</td>
+                  <td>12–13px</td>
+                  <td>400</td>
+                  <td>.public-downloads__canvas-time</td>
+                </tr>
+                <tr>
+                  <td>标签</td>
+                  <td>平台 / 状态</td>
+                  <td>11–12px</td>
+                  <td>600</td>
+                  <td>.public-downloads__canvas-pill</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <hr class="public-downloads__spec-sep">
+
+        <section class="public-downloads__spec-block">
+          <h2>组件与状态</h2>
+          <div class="public-downloads__spec-grid-2">
+            <div>
+              <h3>状态标签</h3>
+              <div class="public-downloads__spec-row">
+                <span class="public-downloads__canvas-pill public-downloads__canvas-pill--success">公开</span>
+                <span class="public-downloads__spec-muted">无密码访问</span>
+              </div>
+              <div class="public-downloads__spec-row">
+                <span class="public-downloads__canvas-pill public-downloads__canvas-pill--lock">需密码</span>
+                <span class="public-downloads__spec-muted">须验证</span>
+              </div>
+              <div class="public-downloads__spec-row">
+                <span class="public-downloads__canvas-pill public-downloads__canvas-pill--warn">已归档</span>
+                <span class="public-downloads__spec-muted">停止分发</span>
+              </div>
+            </div>
+            <div>
+              <h3>按钮</h3>
+              <div class="public-downloads__spec-row">
+                <button type="button" class="public-downloads__canvas-btn public-downloads__canvas-btn--primary">立即安装</button>
+                <span class="public-downloads__spec-muted">Primary</span>
+              </div>
+              <div class="public-downloads__spec-row">
+                <button type="button" class="public-downloads__canvas-btn public-downloads__canvas-btn--secondary">下载 APK</button>
+                <span class="public-downloads__spec-muted">Secondary</span>
+              </div>
+              <div class="public-downloads__spec-row">
+                <button type="button" class="public-downloads__canvas-btn public-downloads__canvas-btn--ghost">辅助操作</button>
+                <span class="public-downloads__spec-muted">Ghost</span>
+              </div>
+            </div>
+            <div>
+              <h3>App 图标（canvas 扁平字母标）</h3>
+              <div class="public-downloads__spec-row">
+                <span class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--a">B</span>
+                <span class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--b">F</span>
+                <span class="public-downloads__canvas-app-icon public-downloads__canvas-app-icon--c">W</span>
+              </div>
+            </div>
+            <div>
+              <h3>二维码区域</h3>
+              <div class="public-downloads__spec-row align-start">
+                <img src="./canvas-qrcode.svg" width="100" height="100" alt="">
+                <ul class="public-downloads__spec-list">
+                  <li>140×140px 实现参考</li>
+                  <li>白底、6px 圆角</li>
+                  <li>内容为公开详情页 URL</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="public-downloads__spec-sep">
+
+        <section class="public-downloads__spec-block">
+          <h2>响应式</h2>
+          <div class="public-downloads__spec-two-col">
+            <div>
+              <h3>移动端（≤640px）</h3>
+              <ul class="public-downloads__spec-bullets">
+                <li>单列全宽卡片</li>
+                <li>平台筛选可横向滚动</li>
+                <li>详情页二维码独占一行居中</li>
+                <li>安装 / 下载按钮纵向排列</li>
+                <li>触控目标 ≥ 44px</li>
+              </ul>
+            </div>
+            <div>
+              <h3>桌面端（≥768px）</h3>
+              <ul class="public-downloads__spec-bullets">
+                <li>列表可 2–3 列 Grid</li>
+                <li>详情二维码与按钮左右并列</li>
+                <li>历史版本四列表格完整展示</li>
+                <li>内容区最大宽度约 720–960px 居中</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </body>
+</html>
