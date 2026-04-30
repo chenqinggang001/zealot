@@ -283,6 +283,13 @@ module PublicDownloadsHelper
     public_downloads_fetch(release, :install_url).presence || '#'
   end
 
+  def public_download_install_token_url(release)
+    return '#' if release.blank?
+    return release_install_token_url(release) if release.respond_to?(:install_url)
+
+    public_downloads_fetch(release, :install_token_url).presence || '#'
+  end
+
   def public_download_download_url(release)
     return '#' if release.blank?
     return release.download_url if release.respond_to?(:download_url)

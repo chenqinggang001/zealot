@@ -20,6 +20,7 @@ RSpec.describe 'public_downloads/_download_actions', type: :view do
   it 'renders the iOS primary action with the install Stimulus action' do
     allow(view).to receive(:public_download_ios_release?).with(release).and_return(true)
     allow(view).to receive(:public_download_install_url).with(release).and_return('itms-services://download')
+    allow(view).to receive(:public_download_install_token_url).with(release).and_return('/install_token')
     allow(view).to receive(:public_download_install_button_label).with(release).and_return('立即安装')
 
     render partial: 'public_downloads/download_actions', locals: { release: release, channel: channel }
@@ -28,6 +29,7 @@ RSpec.describe 'public_downloads/_download_actions', type: :view do
     primary_action = fragment.at_css('.public-downloads__canvas-btn--primary')
 
     expect(fragment.at_css('[data-controller="release-download"]')).to be_present
+    expect(fragment.at_css('[data-release-download-install-token-url-value]')['data-release-download-install-token-url-value']).to eq('/install_token')
     expect(primary_action.name).to eq('button')
     expect(primary_action['data-action']).to eq('release-download#install')
     expect(fragment.at_css('[data-release-download-target="installIssue"] [data-action="release-download#showQA"]')).to be_present
@@ -36,6 +38,7 @@ RSpec.describe 'public_downloads/_download_actions', type: :view do
   it 'renders non-iOS primary action as a plain download link' do
     allow(view).to receive(:public_download_ios_release?).with(release).and_return(false)
     expect(view).not_to receive(:public_download_install_url)
+    expect(view).not_to receive(:public_download_install_token_url)
 
     render partial: 'public_downloads/download_actions', locals: { release: release, channel: channel }
 

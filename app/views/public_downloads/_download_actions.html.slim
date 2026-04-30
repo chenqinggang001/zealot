@@ -7,6 +7,7 @@ section.public-downloads__canvas-detail-actions[
   aria-label=t('public_downloads.download_actions', default: '二维码与安装')
   data-controller=("release-download" if install_flow)
   data-release-download-install-url-value=(public_download_install_url(release) if install_flow)
+  data-release-download-install-token-url-value=(public_download_install_token_url(release) if install_flow)
   data-release-download-installing-value=(t('public_downloads.installing', default: '正在安装...') if install_flow)
   data-release-download-installed-value=(t('public_downloads.installed', default: '已发送安装请求') if install_flow)
 ]

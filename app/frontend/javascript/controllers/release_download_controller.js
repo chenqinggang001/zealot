@@ -20,6 +20,7 @@ export default class extends Controller {
     openBrower: String,
 
     installUrl: String,
+    installTokenUrl: String,
     installing: String,
     installed: String
   }
@@ -34,11 +35,20 @@ export default class extends Controller {
   }
 
   install(event) {
-    this.renderLoading(event.target)
+    event.preventDefault()
+    this.renderLoading(event.currentTarget)
 
-    const link = this.installUrlValue
+    const link = this.resolveInstallUrl()
     console.debug("install url", link)
     window.location.href = link
+  }
+
+  resolveInstallUrl() {
+    if (this.hasInstallTokenUrlValue && this.installTokenUrlValue) {
+      return this.installTokenUrlValue
+    }
+
+    return this.installUrlValue
   }
 
   showCertExpired() {

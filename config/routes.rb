@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resources :releases, path_names: { new: 'upload' } do
       scope module: :releases do
         get :install, to: 'install#show'
+        get :install_token, to: 'install#token'
       end
 
       scope module: :releases do

@@ -12,13 +12,13 @@ module ReleaseAuth
   end
 
   def download_token(expires_in: DOWNLOAD_TOKEN_EXPIRES_IN)
-    signed_id(purpose: DOWNLOAD_TOKEN_PURPOSE, expires_in: expires_in)
+    signed_id(purpose: download_token_purpose, expires_in: expires_in)
   end
 
   def valid_download_token?(token)
     return false if token.blank?
 
-    self.class.find_signed(token, purpose: DOWNLOAD_TOKEN_PURPOSE) == self
+    self.class.find_signed(token, purpose: download_token_purpose) == self
   end
 
   def password_match?(cookies, password)
@@ -38,5 +38,10 @@ module ReleaseAuth
 
   def cache_key
     @cache_key ||= "#{COOKIE_KEY_PREFIX}#{channel.id}"
+  end
+
+  def download_token_purpose
+    password_digest = channel.password.present? ? channel.encode_password : 'public'
+    "#{DOWNLOAD_TOKEN_PURPOSE}:#{password_digest}"
   end
 end
