@@ -44,8 +44,19 @@ module AppsHelper
     user_signed_in? || matched_password?(release)
   end
 
+  def release_install_url(release)
+    release.install_url(token: release_authorized_download_token(release))
+  end
+
   def matched_password?(release)
     release.cookie_password_matched?(cookies)
+  end
+
+  def release_authorized_download_token(release)
+    return if release.blank? || release.channel.password.blank?
+    return unless logged_in_or_without_auth?(release)
+
+    release.download_token
   end
 
   def git_commit_url(git_url, commit, commit_length = 8)

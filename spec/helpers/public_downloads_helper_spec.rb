@@ -53,7 +53,7 @@ RSpec.describe PublicDownloadsHelper, type: :helper do
       channel = instance_double('Channel', to_param: 'android')
 
       expect(helper.public_download_qrcode_path(release, channel)).to eq(
-        '/download_apps/android/releases/12/qrcode/lg/public_download'
+        '/download_apps/android/releases/12/qrcode/lg/public_download.svg'
       )
     end
   end

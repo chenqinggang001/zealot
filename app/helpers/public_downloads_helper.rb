@@ -273,12 +273,12 @@ module PublicDownloadsHelper
 
   def public_download_qrcode_path(release, channel = nil)
     channel ||= public_download_release_channel(release)
-    public_download_app_release_qrcode_path(channel_id: channel, id: release, size: 'lg', theme: 'public_download')
+    public_download_app_release_qrcode_path(channel_id: channel, id: release, size: 'lg', theme: 'public_download', format: :svg)
   end
 
   def public_download_install_url(release)
     return '#' if release.blank?
-    return release.install_url if release.respond_to?(:install_url)
+    return release_install_url(release) if release.respond_to?(:install_url)
 
     public_downloads_fetch(release, :install_url).presence || '#'
   end

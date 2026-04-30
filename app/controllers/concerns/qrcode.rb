@@ -10,7 +10,7 @@ module Qrcode
     },
     public_download: {
       fill: 'FFFFFF',
-      color: '202226'
+      color: '111111'
     },
     dark: {
       fill: '000000',

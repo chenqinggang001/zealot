@@ -11,7 +11,11 @@
           <key>kind</key>
           <string>software-package</string>
           <key>url</key>
-          <string><%= filename_download_release_url(@release, @release.download_filename) %></string>
+          <string><%= filename_download_release_url(
+                        @release,
+                        @release.download_filename,
+                        **(@download_token.present? ? { token: @download_token } : {})
+                      ) %></string>
         </dict>
         <% if @release.icon && @release.icon.file && @release.icon.file.exists? %>
         <dict>

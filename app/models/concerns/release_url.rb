@@ -11,11 +11,14 @@ module ReleaseUrl
     download_release_url(id)
   end
 
-  def install_url
+  def install_url(token: nil)
     return download_url unless platform == 'iOS'
 
-    ios_url = channel_release_install_url(channel.slug, id)
-    "itms-services://?action=download-manifest&url=#{ios_url}"
+    options = {}
+    options[:token] = token if token.present?
+    ios_url = channel_release_install_url(channel.slug, id, **options)
+    encoded_ios_url = ERB::Util.url_encode(ios_url)
+    "itms-services://?action=download-manifest&url=#{encoded_ios_url}"
   end
 
   def release_url
