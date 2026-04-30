@@ -8,6 +8,10 @@ module Qrcode
       fill: 'FFFFFF',
       color: '465960'
     },
+    public_download: {
+      fill: 'FFFFFF',
+      color: '202226'
+    },
     dark: {
       fill: '000000',
       color: 'DEDCDC'

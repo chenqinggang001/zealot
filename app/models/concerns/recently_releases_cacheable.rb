@@ -4,7 +4,7 @@ module RecentlyReleasesCacheable
   extend ActiveSupport::Concern
 
   included do
-    after_destroy :delete_app_recently_releases_cache
+    after_commit :delete_app_recently_releases_cache, on: %i[create update destroy]
   end
 
   private

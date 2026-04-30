@@ -11,7 +11,7 @@
           <key>kind</key>
           <string>software-package</string>
           <key>url</key>
-          <string><%= @release.download_url %></string>
+          <string><%= filename_download_release_url(@release, @release.download_filename) %></string>
         </dict>
         <% if @release.icon && @release.icon.file && @release.icon.file.exists? %>
         <dict>

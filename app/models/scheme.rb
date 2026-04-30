@@ -11,8 +11,6 @@ class Scheme < ApplicationRecord
 
   validates :name, presence: true
 
-  after_destroy :delete_app_recently_releases_cache
-
   def app_name
     "#{app.name} #{name}"
   end

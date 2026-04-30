@@ -32,8 +32,6 @@ class Channel < ApplicationRecord
 
   before_create :generate_default_values
   before_save :generate_default_values, if: -> { slug.blank? }
-  after_destroy :delete_app_recently_releases_cache
-
   validates :name, presence: true
   validates :slug, uniqueness: true
   validates :device_type, presence: true, inclusion: { in: self.device_types.keys }

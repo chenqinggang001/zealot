@@ -22,6 +22,11 @@ html lang="#{I18n.locale}" data-theme=active_theme
         = link_to public_download_apps_path, class: 'public-downloads__canvas-brand'
           span.public-downloads__canvas-brand-title = t('public_downloads.title', default: 'App 下载中心')
           span.public-downloads__canvas-brand-route = public_download_title.presence || '/download_apps'
+        .public-downloads__canvas-topbar-actions
+          = link_to t('dashboard.title'),
+                    root_path,
+                    class: 'public-downloads__canvas-topbar-link',
+                    data: { turbo_frame: '_top' }
 
     - if flash.any?
       .public-downloads__canvas-flashes

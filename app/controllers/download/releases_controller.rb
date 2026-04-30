@@ -20,7 +20,7 @@ class Download::ReleasesController < ApplicationController
 
   def download
     # 触发 web_hook
-    @release.channel.perform_web_hook('download_events', current_user&.id)
+    @release.channel.perform_web_hook('download_events', current_user&.id) unless request.head?
 
     send_file_or_redirect(@release.file, filename: @release.download_filename)
   end
@@ -38,5 +38,4 @@ class Download::ReleasesController < ApplicationController
     @release = Release.find(params[:id])
   end
 end
-
 

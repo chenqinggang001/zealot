@@ -30,8 +30,6 @@ class Release < ApplicationRecord
   before_save   :strip_branch
 
   after_create  :retained_build_job
-  after_create  :delete_app_recently_releases_cache
-
   delegate :scheme, to: :channel
   delegate :app, to: :scheme
 

@@ -26,7 +26,7 @@ RSpec.describe PublicDownloads::CatalogBuilder do
       )
     end
 
-    it 'groups released channels by system and keeps every app environment entry' do
+    it 'groups channels by system and keeps every app environment entry' do
       base_time = Time.zone.local(2026, 1, 1, 12, 0, 0)
 
       android_app = create_app_record(name: 'Android App')
@@ -104,18 +104,17 @@ RSpec.describe PublicDownloads::CatalogBuilder do
       android_entry = find_app_entry(android_section, android_app)
       expect(android_entry[:latest_release]).to eq(latest_production_release)
       expect(android_entry[:environments].map { |environment| environment[:scheme] }).to eq(
-        [production_scheme, beta_scheme]
+        [production_scheme, beta_scheme, empty_scheme]
       )
       expect(android_entry[:environments].map { |environment| environment[:channel] }).to eq(
-        [production_channel, beta_channel]
+        [production_channel, beta_channel, empty_channel]
       )
       expect(android_entry[:environments].map { |environment| environment[:latest_release] }).to eq(
-        [latest_production_release, beta_release]
+        [latest_production_release, beta_release, nil]
       )
       expect(android_entry[:environments].map { |environment| environment[:latest_release] }).not_to include(
         old_production_release
       )
-      expect(android_entry[:environments].map { |environment| environment[:channel] }).not_to include(empty_channel)
 
       expect(find_section(catalog, 'ios')[:apps].first).to include(app: ios_app, latest_release: ios_release)
       expect(find_section(catalog, 'harmonyos')[:apps].first).to include(

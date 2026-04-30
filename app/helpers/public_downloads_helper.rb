@@ -37,9 +37,7 @@ module PublicDownloadsHelper
   end
 
   def public_download_entry_environments(entry)
-    Array(public_downloads_fetch(entry, :environments)).select do |environment|
-      public_download_environment_release(environment).present?
-    end
+    Array(public_downloads_fetch(entry, :environments))
   end
 
   def public_download_environment_scheme(environment)
@@ -275,7 +273,7 @@ module PublicDownloadsHelper
 
   def public_download_qrcode_path(release, channel = nil)
     channel ||= public_download_release_channel(release)
-    public_download_app_release_qrcode_path(channel_id: channel, id: release, size: 'lg', theme: 'light')
+    public_download_app_release_qrcode_path(channel_id: channel, id: release, size: 'lg', theme: 'public_download')
   end
 
   def public_download_install_url(release)

@@ -24,8 +24,6 @@ class App < ApplicationRecord
 
   validates :name, presence: true
 
-  after_destroy :delete_app_recently_releases_cache
-
   def channel_ids
     return unless schcmes_ids = schemes.select(:id).map(&:id)
     return unless channel_ids = Channel.select(:id).where(scheme: schcmes_ids).map(&:id)
