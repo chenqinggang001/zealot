@@ -1,0 +1,37 @@
+- if @authorized
+  - content_for :title do
+    = public_download_app_name(@release.app)
+
+  main.public-downloads.public-downloads--canvas-detail
+    .public-downloads__canvas-detail-wrap
+      section.public-downloads__canvas-detail-hero
+        == public_download_release_icon(@release, app: @release.app, size: :lg)
+        .public-downloads__canvas-detail-meta
+          .public-downloads__canvas-detail-title-row
+            h1.public-downloads__canvas-detail-name = public_download_app_name(@release.app)
+            span.public-downloads__canvas-pill = public_download_platform_label(@release)
+            span.public-downloads__canvas-pill.public-downloads__canvas-pill--warn = public_download_scheme_name(@release.scheme)
+            - if public_download_release_archived?(@release)
+              span.public-downloads__canvas-pill.public-downloads__canvas-pill--warn = t('public_downloads.archived', default: '已归档')
+          .public-downloads__canvas-detail-version-row
+            span.public-downloads__canvas-detail-version = public_download_version_label(@release, prefix: true)
+            span.public-downloads__canvas-detail-build = public_download_build_label(@release)
+          p.public-downloads__canvas-detail-published = public_download_published_label(@release)
+
+      .public-downloads__canvas-divider.public-downloads__canvas-divider--wide role="presentation"
+
+      == render 'public_downloads/download_actions', release: @release, channel: @channel
+
+      .public-downloads__canvas-divider.public-downloads__canvas-divider--wide role="presentation"
+
+      == render 'public_downloads/changelog', release: @release
+
+      .public-downloads__canvas-divider.public-downloads__canvas-divider--wide role="presentation"
+
+      == render 'public_downloads/release_history', release: @release, channel: @channel, releases: @history_releases
+- else
+  - content_for :title do
+    = t('public_downloads.password_title', default: '访问验证')
+
+  main.public-downloads.public-downloads--canvas-password
+    == render 'public_downloads/password_auth', release: @release, channel: @channel, error_message: @error_message

@@ -1,0 +1,40 @@
+- content_for :title do
+  = t('public_downloads.catalog', default: '应用列表')
+
+- sections = public_download_catalog_sections(@catalog_sections)
+
+main.public-downloads.public-downloads--catalog
+  section.public-downloads__catalog-shell
+    header.public-downloads__catalog-head
+      div
+        h1 = t('public_downloads.catalog', default: '应用列表')
+        p = t('public_downloads.catalog_description', default: '按系统选择应用与环境，进入该系统、该应用、该环境下的最新版本下载页')
+
+    - if sections.any?
+      section.public-downloads__catalog-tabs aria-label=t('public_downloads.platform_filter', default: '按系统筛选应用')
+        - sections.each_with_index do |section, index|
+          input.public-downloads__tab-input[
+            type="radio"
+            id="system-#{public_download_section_key(section)}"
+            name="system"
+            checked=index.zero?
+          ]
+
+        .public-downloads__catalog-tab-list
+          - sections.each do |section|
+            label for="system-#{public_download_section_key(section)}"
+              = public_download_section_name(section)
+
+        .public-downloads__catalog-panels
+          - sections.each do |section|
+            - entries = public_download_section_entries(section)
+            section.public-downloads__catalog-panel class="public-downloads__catalog-panel--#{public_download_section_key(section)}"
+              .public-downloads__catalog-panel-head
+                h2 = public_download_section_name(section)
+                span = t('public_downloads.apps_count', count: entries.size, default: "#{entries.size} 款应用")
+
+              .public-downloads__canvas-panel-body
+                - entries.each do |entry|
+                  == render 'public_downloads/app_card', entry: entry, section: section
+    - else
+      p.public-downloads__canvas-empty = t('public_downloads.empty_catalog', default: '暂无可下载应用')

@@ -94,6 +94,22 @@ Rails.application.routes.draw do
   #############################################
   # Download
   #############################################
+  get '/download_apps', to: 'public_downloads#index', as: :public_download_apps
+  get '/download_apps/:channel_id/releases/:id',
+      to: 'public_downloads#show',
+      as: :public_download_app_release
+  post '/download_apps/:channel_id/releases/:id/auth',
+       to: 'public_downloads#auth',
+       as: :auth_public_download_app_release
+  get '/download_apps/:channel_id/releases/:id/qrcode(/:size)(/:theme)',
+      to: 'public_downloads/qrcodes#show',
+      as: :public_download_app_release_qrcode,
+      defaults: {
+        size: 'md',
+        theme: 'light',
+        format: 'png'
+      }
+
   namespace :download do
     resources :releases, only: :show do
       member do

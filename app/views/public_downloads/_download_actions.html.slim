@@ -1,0 +1,70 @@
+- notices = public_download_release_notices(release)
+- install_flow = public_download_ios_release?(release)
+- install_disabled = public_download_install_disabled?(release)
+- download_disabled = public_download_download_disabled?(release)
+
+section.public-downloads__canvas-detail-actions[
+  aria-label=t('public_downloads.download_actions', default: '二维码与安装')
+  data-controller=("release-download" if install_flow)
+  data-release-download-install-url-value=(public_download_install_url(release) if install_flow)
+  data-release-download-installing-value=(t('public_downloads.installing', default: '正在安装...') if install_flow)
+  data-release-download-installed-value=(t('public_downloads.installed', default: '已发送安装请求') if install_flow)
+]
+  .public-downloads__canvas-qr-block
+    = image_tag public_download_qrcode_path(release, channel),
+                class: 'public-downloads__canvas-qr-img',
+                width: 140,
+                height: 140,
+                alt: ''
+    p.public-downloads__canvas-qr-caption = t('public_downloads.qrcode_caption', default: '扫码访问此页')
+
+  .public-downloads__canvas-action-col
+    p.public-downloads__canvas-file-meta = public_download_file_meta(release)
+
+    .public-downloads__canvas-action-buttons data-release-download-target=("buttons" if install_flow)
+      - if install_flow
+        button.public-downloads__canvas-btn.public-downloads__canvas-btn--primary[
+          type="button"
+          disabled=install_disabled
+          data-action=("release-download#install" unless install_disabled)
+          data-release-download-target="installButton"
+        ]
+          = public_download_install_button_label(release)
+
+        - if download_disabled
+          button.public-downloads__canvas-btn.public-downloads__canvas-btn--secondary.public-downloads__canvas-btn--disabled[
+            type="button"
+            disabled=true
+            data-release-download-target="downloadButton"
+          ]
+            = public_download_download_button_label(release)
+        - else
+          = link_to public_download_download_button_label(release),
+                    public_download_download_url(release),
+                    class: 'public-downloads__canvas-btn public-downloads__canvas-btn--secondary',
+                    target: '_blank',
+                    rel: 'noopener',
+                    data: { release_download_target: 'downloadButton' }
+      - else
+        - if download_disabled
+          button.public-downloads__canvas-btn.public-downloads__canvas-btn--primary.public-downloads__canvas-btn--disabled[
+            type="button"
+            disabled=true
+          ]
+            = t('public_downloads.download_unavailable', default: '无法下载')
+        - else
+          = link_to public_download_download_button_label(release),
+                    public_download_download_url(release),
+                    class: 'public-downloads__canvas-btn public-downloads__canvas-btn--primary',
+                    target: '_blank',
+                    rel: 'noopener'
+
+    - if notices.any?
+      .public-downloads__canvas-action-notices
+        - notices.each do |notice|
+          p.public-downloads__canvas-action-notice = notice
+
+    - if install_flow
+      .public-downloads__canvas-action-issue.hidden data-release-download-target="installIssue"
+        a.public-downloads__canvas-action-link href="javascript:void(0);" data-action="release-download#showQA"
+          = t('releases.show.cannot_install_or_untrusted_enterprise_developer', default: '无法安装或提示未受信任的企业级开发者？')

@@ -1,0 +1,13 @@
+- release = public_download_environment_release(environment)
+- channel = public_download_environment_channel(environment)
+- button_classes = ['public-downloads__canvas-btn']
+- button_classes << (primary ? 'public-downloads__canvas-btn--primary' : 'public-downloads__canvas-btn--secondary')
+
+- if release.present?
+  = link_to public_download_environment_name(environment),
+            public_download_release_path(release, channel),
+            class: button_classes.join(' ')
+- else
+  - button_classes << 'public-downloads__canvas-btn--disabled'
+  span class=button_classes.join(' ')
+    = public_download_environment_name(environment)

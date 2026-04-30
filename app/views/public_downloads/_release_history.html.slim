@@ -1,0 +1,47 @@
+- history_releases = Array(releases)
+
+section.public-downloads__canvas-section
+  h2.public-downloads__canvas-section-title = t('public_downloads.history_title', default: '历史版本')
+  p.public-downloads__canvas-section-lead
+    = t('public_downloads.history_description', scope: nil, default: "仅展示当前渠道（#{public_download_history_scope_label(channel, release)}）下的版本")
+
+  - if history_releases.any?
+    .public-downloads__canvas-table-wrap
+      table.public-downloads__canvas-table
+        thead
+          tr
+            th scope="col" = t('public_downloads.version', default: '版本号')
+            th scope="col" = t('public_downloads.build', default: '构建号')
+            th scope="col" = t('public_downloads.published_at', default: '发布时间')
+            th scope="col" = t('public_downloads.status', default: '状态')
+        tbody
+          - history_releases.each do |history_release|
+            - current = public_download_current_release?(history_release, release)
+            - history_path = public_download_release_path(history_release, channel)
+            tr class=('public-downloads__canvas-table-row--current' if current)
+              - if current
+                td
+                  = public_download_version_label(history_release)
+                td = public_download_build_label(history_release, prefix: false)
+                td = public_download_datetime_label(history_release.created_at)
+                td
+                  span.public-downloads__canvas-table-current = t('public_downloads.current_version', default: '当前版本')
+              - else
+                td
+                  = link_to public_download_version_label(history_release),
+                            history_path,
+                            class: 'public-downloads__canvas-table-row-link public-downloads__canvas-table-link'
+                td
+                  = link_to public_download_build_label(history_release, prefix: false),
+                            history_path,
+                            class: 'public-downloads__canvas-table-row-link'
+                td
+                  = link_to public_download_datetime_label(history_release.created_at),
+                            history_path,
+                            class: 'public-downloads__canvas-table-row-link'
+                td
+                  = link_to t('public_downloads.available_version', default: '-'),
+                            history_path,
+                            class: 'public-downloads__canvas-table-row-link public-downloads__canvas-table-muted'
+  - else
+    p.public-downloads__canvas-empty = t('public_downloads.empty_history', default: '暂无历史版本')

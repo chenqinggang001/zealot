@@ -1,0 +1,14 @@
+- changelog_items = public_download_changelog_items(release)
+
+section.public-downloads__canvas-section
+  h2.public-downloads__canvas-section-title = t('public_downloads.changelog_title', default: '更新说明')
+
+  - if changelog_items.any?
+    ul.public-downloads__changelog.public-downloads__changelog--accent
+      - changelog_items.each do |changelog|
+        - message = public_download_changelog_message(changelog)
+        - next if message.blank?
+        li
+          = simple_format message, {}, wrapper_tag: 'span'
+  - else
+    p.public-downloads__canvas-empty = t('public_downloads.empty_changelog', default: '暂无更新说明')

@@ -1,0 +1,28 @@
+- app = public_download_entry_app(entry)
+- release = public_download_entry_release(entry)
+- channel = public_download_release_channel(release)
+- environments = public_download_entry_environments(entry)
+- card_classes = ['public-downloads__canvas-app-card']
+- card_classes << 'public-downloads__canvas-app-card--archived' if public_download_app_archived?(app)
+
+article class=card_classes.join(' ')
+  .public-downloads__canvas-app-row
+    == public_download_release_icon(release, app: app)
+    .public-downloads__canvas-app-main
+      .public-downloads__canvas-app-title-row
+        h3 = public_download_app_name(app)
+        - if public_download_app_archived?(app)
+          span.public-downloads__canvas-pill.public-downloads__canvas-pill--warn = t('public_downloads.archived', default: '已归档')
+      .public-downloads__canvas-app-sub
+        span.public-downloads__canvas-pill = public_download_section_name(section)
+        span.public-downloads__canvas-ver = public_download_compact_version_label(release)
+    .public-downloads__canvas-app-aside
+      span.public-downloads__canvas-time = public_download_datetime_label(release.created_at)
+      span.public-downloads__canvas-pill class=public_download_access_pill_class(channel)
+        = public_download_access_label(channel)
+
+  .public-downloads__canvas-divider role="presentation"
+
+  .public-downloads__canvas-env-buttons
+    - environments.each_with_index do |environment, index|
+      == render 'public_downloads/environment_entry', environment: environment, primary: index.zero?
